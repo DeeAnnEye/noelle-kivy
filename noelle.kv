@@ -1,4 +1,59 @@
-<MainApp>:
-    orientation: 'vertical'
-    padding: 20
-    spacing: 20
+<CircleButton@Button>:
+    size_hint: None, None
+    size: 80, 80
+    background_normal: ""
+    background_down: ""
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.6, 0.8, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+        PushMatrix
+        Rotate:
+            angle: 0
+            origin: self.center
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            source: "mic.png"
+            size: self.width * 0.5, self.height * 0.5
+            pos: self.x + self.width * 0.25, self.y + self.height * 0.25
+        PopMatrix
+
+<MainUI>:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "Meet Noelle"
+        font_size: '28sp'
+        bold: True
+        color: 1, 1, 1, 1
+        size_hint: None, None
+        size: self.texture_size
+        pos_hint: {"center_x": 0.5, "top": 0.95}
+
+    Label:
+        id: response_label
+        text: "I'm listening..."
+        font_size: '18sp'
+        color: 0.3, 0.3, 0.3, 1
+        size_hint: 0.8, None
+        height: self.texture_size[1] + 30
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        halign: "center"
+        valign: "middle"
+        text_size: self.width, None
+    
+    CircleButton:
+        id: mic_button
+        text: ""
+        pos_hint: {"center_x": 0.5, "y": 0.05}
+
